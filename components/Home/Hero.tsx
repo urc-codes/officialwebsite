@@ -1,5 +1,6 @@
 "use client";
-
+import { motion } from "framer-motion";
+import { ArrowDown, Rocket } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -39,51 +40,77 @@ const Hero = () => {
     "data-fillout-button-color": "#B4D811FF",
     "data-fillout-button-size": "large",
     "data-fillout-inherit-parameters": true,
-    "data-fillout-popup-size": "large"
+    "data-fillout-popup-size": "large",
   };
 
   return (
-    <div className="hero_banner w-full h-fit sm:h-[70vh] md:h-[90vh] flex items-center justify-center flex-col text-white relative bg-gradient-to-b from-[#053247] to-[#032F3E]">
+    <div className="hero_banner w-full h-screen  sm:h-[70vh] md:h-[90vh] flex items-center justify-center flex-col text-white relative bg-gradient-to-b from-[#053247] to-[#032F3E]">
       <div className="absolute inset-0 bg-black/50 z-0"></div>
 
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-20">
-        <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight mb-4">
-          Welcome to the <br />
-          <span className="text-primary-light">UENR Robotics Club</span>
-        </h1>
-
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-medium tracking-wide mb-6 text-gray-300">
-          Nursing Engineers for a Better Society
-        </h2>
-
-        <p className="text-lg sm:text-xl md:text-2xl tracking-wide max-w-3xl text-gray-200 mb-8">
-          We empower aspiring engineers through hands-on learning and
-          cutting-edge technology, shaping the future one innovation at a time.
-        </p>
-
-        {/* Main Hero Button */}
-        <button
-          {...buttonProps}
-          className="bg-primary-light bg-opacity-35 backdrop-blur-3xl border hover:bg-white hover:text-black px-6 mb-10 py-3 rounded-full font-bold text-lg shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300"
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-6"
         >
-          JOIN US TODAY
-        </button>
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: [0, -10, 10, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "mirror",
+            }}
+            className="flex justify-center mb-6"
+          >
+            <Rocket className="text-yellow-400 w-16 h-16" strokeWidth={1.5} />
+          </motion.div>
+
+          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
+            UENR <span className="text-yellow-400">Robotics Club</span>
+          </h1>
+
+          <h2 className="text-xl md:text-2xl text-gray-200 font-medium max-w-3xl mx-auto">
+            Nursing Engineers for a Better Society
+          </h2>
+
+          <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto">
+            We empower aspiring engineers through hands-on learning and
+            cutting-edge technology, shaping the future one innovation at a
+            time.
+          </p>
+
+          <motion.button
+            {...buttonProps}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-yellow-400 text-blue-900 px-8 py-3 rounded-full 
+            font-bold text-lg shadow-xl hover:bg-yellow-500 
+            transition-all duration-300 flex items-center gap-3 mx-auto"
+          >
+            Join Us Today <ArrowDown className="inline w-5 h-5" />
+          </motion.button>
+        </motion.div>
       </div>
 
-      {/* Floating Button */}
-      <button
+      <motion.button
         {...buttonProps}
         className={`
-          fixed bottom-5 right-5 z-50
+          fixed bottom-5 right-5 z-50 flex justify-center items-center
           bg-primary-light text-black bg-yellow-400
           px-4 py-3 rounded-full shadow-lg
           cursor-pointer hover:shadow-xl
           transition-all duration-500
-          ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}
+          ${
+            isScrolled
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-16"
+          }
         `}
       >
-        JOIN US
-      </button>
+        <Rocket className="w-5 h-5" strokeWidth={2} /> Join Us
+      </motion.button>
     </div>
   );
 };
