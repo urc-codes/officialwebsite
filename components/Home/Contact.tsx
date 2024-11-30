@@ -60,7 +60,7 @@ const Contact: React.FC = () => {
 
         <ContactInfo
           label="LOCATION"
-          info="UENR, Sunyamni - Bono Region, Ghana"
+          info="UENR, Sunyani - Bono Region, Ghana"
         />
         <ContactInfo label="PHONE" info="+233 25 763 8686" />
         <ContactInfo label="EMAIL" info="uenrroboticsclub@gmail.com" />
